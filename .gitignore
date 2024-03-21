@@ -2,3 +2,4 @@ criptotax_dev.ipynb
 .ipynb_checkpoints/criptotax_dev-checkpoint.ipynb
 criptotax/__pycache__/calculator.cpython-39.pyc
 data/nmr.csv
+__pycache__
