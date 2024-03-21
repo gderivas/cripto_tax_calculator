@@ -7,4 +7,4 @@ if __name__ == '__main__':
 
     calc = tax_calculator(args,path = ['data/trades.csv','data/nmr.csv'])
 
-    tax_calculator.calculate()
+    calc.calculate()

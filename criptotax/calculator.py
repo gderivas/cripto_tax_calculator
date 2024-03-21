@@ -15,7 +15,7 @@ class tax_calculator:
             df_n = ''
         else:
             print('Plattform not recognized')
-        print('Data import succesfully!\n')
+        print('\nData import succesfully!')
         return df_k,df_n
 
     def calculate(self):
@@ -30,21 +30,15 @@ class tax_calculator:
 
 
     def calculate_nmr(self):
-        print('Calculating Numerai profits/losses:\n')
-        print('#'*10)
-        print('\n')
+        print('\nCalculating Numerai profits/losses:')
         pass
 
     def calculate_kraken(self):
-        print('Calculating Kraken profits/losses:\n')
-        print('#'*10)
-        print('\n')
+        print('\nCalculating Kraken profits/losses:')
         pass
 
     def summary(self):
-        print('Summary:\n')
-        print('#'*10)
-        print('\n')
+        print('\nSummary:')
         pass
 
     def export(self):
