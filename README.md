@@ -8,7 +8,7 @@ Criptocurrencies Profit/Losses Calculator for the following plattforms:
 
 Calculates profit/loss for buy/sell orders (FIFO method) of criptocurrencies and stake/earn profits. It also takes into account the difference in price of the earn/staked profits and the sell orders.
 
-The kraken trades export does not contain the actual prices for the earn profits. The price is queried against the [Kraken Rest API](https://docs.kraken.com/rest/#tag/Spot-Market-Data/operation/getOHLCData). You can use a file with the prices instead. If not, a excel file will be created with the prices/exact dates used. By the default: ``data/stake_prices.xlsx``
+The kraken trades export does not contain the actual prices for the earn profits. The price is queried against the [Kraken Rest API](https://docs.kraken.com/rest/#tag/Spot-Market-Data/operation/getOHLCData). You can use a file with the prices instead. If not, a excel file will be created with the prices/exact dates used. By default: ``data/stake_prices.xlsx``
 
 ## Disclaimer
 This project, code, procedures and results are not to be regarded as financial, accounting or tax advise for your country!
