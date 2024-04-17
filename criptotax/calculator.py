@@ -13,19 +13,28 @@ class tax_calculator:
     def import_data(self):
         dfk, dfn, dfc = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
         if self.args.plattform == 'all':
-            dfn = pd.read_csv(self.nmr_path) # Numerai may be in different files per year -> method
+            dfn = self.import_nmr() # Numerai may be in different files per year -> method
             dfk = pd.read_csv(self.kraken_path)
             dfc = pd.read_csv(self.coinbase_path)
         elif self.args.plattform == 'kraken':
             dfk =  dfk =  pd.read_csv(self.kraken_path)
         elif self.args.plattform == 'nmr':
-            dfn = pd.read_csv(self.nmr_path)
+            dfn = self.import_nmr()
         elif self.args.plattform == 'coinbase':
             dfc = pd.read_csv(self.coinbase_path)
         else:
             print('Plattform not recognized')
         print('\nData import succesfully!')
         return dfk,dfn,dfc
+    
+    def import_nmr(self):
+        path = 'data/'
+        files = os.listdir(path)
+        dfn = pd.DataFrame()
+        for file in files:
+            if 'nmr' in file:
+                dfn = pd.concat([dfn,pd.read_csv(path+file)])
+        return dfn
 
     def calculate(self):
         if self.args.plattform == 'all':
