@@ -44,5 +44,13 @@ You can specify different options as arguments:
 - ``--kraken_file`` - Specify the path for the kraken export file.
 - ``--nmr_file`` - Specify the path for the Numerai export file.
 
+## Example
+
+``python run.py --year 2023 --nmr_file "data/nmr23.csv"``
+
+## Participate
+
+This is an open source project and you are invited to participate. If you find a bug do not hesitate to submit and issue or even fix it yourself and make a pull request.
+
 ## IMPORTANT: Check the results before submitting the information to the tax authorities!!
 
