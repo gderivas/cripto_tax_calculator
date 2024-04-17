@@ -13,7 +13,7 @@ class tax_calculator:
     def import_data(self):
         dfk, dfn, dfc = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
         if self.args.plattform == 'all':
-            dfn = self.import_nmr() # Numerai may be in different files per year -> method
+            dfn = self.import_nmr() 
             dfk = pd.read_csv(self.kraken_path)
             dfc = pd.read_csv(self.coinbase_path)
         elif self.args.plattform == 'kraken':
@@ -112,7 +112,7 @@ class tax_calculator:
         dfk_s = dfk_s[dfk_s.txid != 'LR6D75-Z6ZFD-K44RMB'] # Pasar una lista en los argumentos / Identificar
         dfk_s['amount'] = dfk_s['amount'] + dfk_s['fee']
                 
-        file_precios = 'data/stake_prices.xlsx' # Pasar el fichero como argumento
+        file_precios = self.args.price_file 
         if os.path.isfile(file_precios):
             precios_stake = pd.read_excel(file_precios)
             dfk_s['precio'] = dfk_s.time.map(dict(zip(precios_stake.time,precios_stake.precio)))
@@ -122,7 +122,7 @@ class tax_calculator:
             print(f'Getting prices from Kraken API, this may take aprox. {dfk_s.shape[0]*5/60} Minutes')
             dfk_s = dfk_s.apply(get_price,axis=1)
             dfk_s['fecha_dif'] = dfk_s.time - dfk_s.fecha_precio
-            dfk_s[['time','precio','fecha_precio','fecha_dif']].to_excel('data/stake_prices.xlsx',index=False) # Fichero como argumento
+            dfk_s[['time','precio','fecha_precio','fecha_dif']].to_excel(file_precios,index=False)
 
         dfk_s['beneficio_earn'] = dfk_s.amount*dfk_s.precio + dfk_s.fee
         dfk_s.precio = dfk_s.precio.astype(float)

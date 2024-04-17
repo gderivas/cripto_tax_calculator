@@ -14,7 +14,6 @@ The kraken trades export does not contain the actual prices for the earn profits
 This project, code, procedures and results are not to be regarded as financial, accounting or tax advise for your country!
 
 ## LOP/WiP
-- Select file for loading historical pricing data in args
 - Calculate taxes based on % of profit
 - Load list of id's to exclude from calculation
 
@@ -43,6 +42,7 @@ You can specify different options as arguments:
 - ``--coinbase_file`` - Specify the path for the coinbase export file.
 - ``--kraken_file`` - Specify the path for the kraken export file.
 - ``--nmr_file`` - Specify the path for the Numerai export file.
+- ``--price_file`` - Specify the file containing the prices for the missing stake information.
 
 ## Example
 

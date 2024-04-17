@@ -25,6 +25,9 @@ def get_args():
     
     parser.add_argument("-nf", "--nmr_file", type=str, default="data/nmr.csv",
                     help="Select the coinbase export file")
+    
+    parser.add_argument("-pf", "--price_file", type=str, default="data/stake_prices.xlsx",
+                help="Specify the file containing the prices for the missing stake information")
 
     args = parser.parse_args()
 
