@@ -19,9 +19,10 @@ This project, code, procedures and results are not to be regarded as financial, 
 - Calculate taxes based on % of profit
 - Load list of id's to exclude from calculation
 
-## Flaws (In future LOP)
+## Flaws (Maybe in future LOP)
 - Only EUR
 - Only EURvsCripto trades are taken into account (Not trades between different criptocurrencies)
+- Only Buy/Sell/Earn or Payouts/Burns orders are considered.
 
 ## Installation
 Prerequisites: git and Python.
