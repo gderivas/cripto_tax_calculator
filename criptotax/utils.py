@@ -3,6 +3,7 @@ import requests
 from datetime import datetime
 import json
 import time
+import os
 
 def get_args():
     parser = configargparse.ArgParser()
@@ -139,6 +140,14 @@ def calculate_coin_profit(df_coin):
         
         df_coin.at[index,'ledger'] = ledger
     return df_coin
+
+
+def clean_previous():
+    path = 'data/export/'
+    files = os.listdir(path)
+    for file in files:
+        if os.path.isfile(path + file):
+            os.remove(path + file)
 
 
 
