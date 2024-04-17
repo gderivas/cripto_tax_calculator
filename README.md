@@ -14,7 +14,6 @@ The kraken trades export does not contain the actual prices for the earn profits
 This project, code, procedures and results are not to be regarded as financial, accounting or tax advise for your country!
 
 ## LOP/WiP
-- Numerai export files are separated by year
 - Select file for loading historical pricing data in args
 - Calculate taxes based on % of profit
 - Load list of id's to exclude from calculation
