@@ -11,7 +11,7 @@ class tax_calculator:
         self.dfk, self.dfn, self.dfc = self.import_data()
 
     def import_data(self):
-        dfk, dfn, dfc = [], [], []
+        dfk, dfn, dfc = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
         if self.args.plattform == 'all':
             dfn = pd.read_csv(self.nmr_path) # Numerai may be in different files per year -> method
             dfk = pd.read_csv(self.kraken_path)
@@ -151,11 +151,14 @@ class tax_calculator:
     def join_exchanges(self):
         print('\nJoining all exchages orders')
         select_columns = ['time','asset','transaction','cantidad','coste','precio','fee','beneficio_earn']
-        dfc = self.dfc[select_columns]
-        dfn = self.dfn[select_columns]
-        dfk_s = self.dfk_s[select_columns]
-        dfk_trades = self.dfk_trades[select_columns]
-        df = pd.concat([dfk_trades,dfc,dfk_s,dfn])
+        if (self.args.plattform == 'coinbase') | (self.args.plattform == 'all'):
+            self.dfc = self.dfc[select_columns]
+        if (self.args.plattform == 'nmr') | (self.args.plattform == 'all'):
+            self.dfn = self.dfn[select_columns]
+        if (self.args.plattform == 'kraken') | (self.args.plattform == 'all'):
+            self.dfk_s = self.dfk_s[select_columns]
+            self.dfk_trades = self.dfk_trades[select_columns]
+        df = pd.concat([self.dfk_trades,self.dfc,self.dfk_s,self.dfn])
         df.time = pd.to_datetime(df.time, utc=True)
         df.sort_values(by='time',inplace=True)
         df = df[df.transaction != '-'] ################################################# REVISAR
