@@ -9,6 +9,8 @@ class tax_calculator:
         self.nmr_path = args.nmr_file
         self.coinbase_path = args.coinbase_file
         self.dfk, self.dfn, self.dfc = self.import_data()
+        self.dfk_trades = pd.DataFrame()
+        self.dfk_s = pd.DataFrame()
    
     def import_data(self):
         dfk, dfn, dfc = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
