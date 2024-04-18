@@ -37,7 +37,7 @@ Prerequisites: git and Python.
 You can specify different options as arguments:
 
 - ``--year`` - Select for which year you want the calculations. By default all years are reported.
-- ``--plattform`` - Select the exchange: ``kraken``,``coinbase`` or ``nmr``. By default all three exchanges are used. 
+- ``--plattform`` - Select the exchange: ``kraken``,``coinbase`` or ``nmr``. Multiple exchanges separated by ','. By default all three exchanges are used. 
 - ``--export`` - Export the data in excel format in the ``data/export/`` folder: Result + one file per cryptocurrency. 
 - ``--coinbase_file`` - Specify the path for the coinbase export file.
 - ``--kraken_file`` - Specify the path for the kraken export file.
