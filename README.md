@@ -41,12 +41,12 @@ You can specify different options as arguments:
 - ``--export`` - Export the data in excel format in the ``data/export/`` folder: Result + one file per cryptocurrency. 
 - ``--coinbase_file`` - Specify the path for the coinbase export file.
 - ``--kraken_file`` - Specify the path for the kraken export file.
-- ``--nmr_file`` - Specify the path for the Numerai export file.
+- ``--nmr_file`` - Specify the path for the Numerai export file. - WiP
 - ``--price_file`` - Specify the file containing the prices for the missing stake information.
 
 ## Example
 
-``python run.py --year 2023 --nmr_file "data/nmr23.csv"``
+``python run.py --year 2023 --kraken_file "data/kraken.csv"``
 
 ## Participate
 
