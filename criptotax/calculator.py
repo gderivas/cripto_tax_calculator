@@ -9,21 +9,25 @@ class tax_calculator:
         self.nmr_path = args.nmr_file
         self.coinbase_path = args.coinbase_file
         self.dfk, self.dfn, self.dfc = self.import_data()
-
+   
     def import_data(self):
         dfk, dfn, dfc = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
+
+        if self.args.plattform == 'all':
+            self.exchanges = ['all']
+        else:
+            self.exchanges = self.args.plattform.split(',')
+
         if self.args.plattform == 'all':
             dfn = self.import_nmr() 
             dfk = pd.read_csv(self.kraken_path)
             dfc = pd.read_csv(self.coinbase_path)
-        elif self.args.plattform == 'kraken':
+        if 'kraken' in self.exchanges:
             dfk =  dfk =  pd.read_csv(self.kraken_path)
-        elif self.args.plattform == 'nmr':
+        if 'nmr' in self.exchanges:
             dfn = self.import_nmr()
-        elif self.args.plattform == 'coinbase':
+        if 'coinbase' in self.exchanges:
             dfc = pd.read_csv(self.coinbase_path)
-        else:
-            print('Plattform not recognized')
         print('\nData import succesfully!')
         return dfk,dfn,dfc
     
@@ -41,17 +45,17 @@ class tax_calculator:
             self.calculate_kraken()
             self.dfn_result = self.calculate_nmr()
             self.calculate_coinbase()
-        elif self.args.plattform == 'kraken':
+        if 'kraken' in self.exchanges:
             self.calculate_kraken()
-        elif self.args.plattform == 'nmr':
+        if 'nmr' in self.exchanges:
             self.dfn_result = self.calculate_nmr()
-        elif self.args.plattform == 'coinbase':
+        if 'coinbase' in self.exchanges:
             self.calculate_coinbase()
         self.join_exchanges()
         self.summary()
     
     def calculate_coinbase(self):
-        print('\nCalculating Coinbase earn profits.')
+        print('\n>> Calculating Coinbase earn profits.')
         dfc = self.dfc
         dfc.Timestamp = pd.to_datetime(dfc.Timestamp.replace('UTC',''))
         dfc.sort_values(by='Timestamp',ascending=True,inplace=True)
@@ -78,7 +82,7 @@ class tax_calculator:
 
 
     def calculate_nmr(self):
-        print('\nCalculating Numerai staked payouts/burns profit&losses:')
+        print('\n>> Calculating Numerai staked payouts/burns profit&losses:')
         dfn = self.dfn
         dfn = dfn[dfn.type.isin(['burn', 'payout'])]
         dfn.inserted_at = pd.to_datetime(dfn.inserted_at)
@@ -100,7 +104,7 @@ class tax_calculator:
         return print(dfn.groupby('year')[['beneficio_earn','tax']].sum())
 
     def calculate_kraken(self):
-        print('\nCalculating Kraken earn profits/losses:')
+        print('\n>> Calculating Kraken earn profits/losses:')
         dfk = self.dfk
         dfk_s = dfk[(dfk.type == 'earn') | (dfk.type == 'staking')]
         dfk_s['type'] = 'earn'
@@ -158,7 +162,7 @@ class tax_calculator:
         return print(dfk_s.groupby(['year','asset'])['beneficio_earn'].sum())
     
     def join_exchanges(self):
-        print('\nJoining all exchages orders')
+        #print('\n>> Joining all exchages orders')
         select_columns = ['time','asset','transaction','cantidad','coste','precio','fee','beneficio_earn']
         if (self.args.plattform == 'coinbase') | (self.args.plattform == 'all'):
             self.dfc = self.dfc[select_columns]
@@ -173,7 +177,7 @@ class tax_calculator:
         df = df[df.transaction != '-'] ################################################# REVISAR
         self.df = df
 
-        print('Calculating profit&losses for all trades')
+        print('\n>> Calculating profit&losses for all trades')
 
         df_final = pd.DataFrame()
         for coin in df.asset.unique():
@@ -202,7 +206,7 @@ class tax_calculator:
         return print(df_final[df_final.transaction == 'sell'].groupby(['asset','year'])['beneficio_trades'].sum())
 
     def summary(self):
-        print('\nSummary:')
+        print('\n>> Summary:')
         return print(self.df_final[(self.df_final.transaction == 'sell') | (self.df_final.transaction == 'earn') | (self.df_final.transaction == 'burn')].groupby(['asset','year'])['beneficio'].sum())
 
 
